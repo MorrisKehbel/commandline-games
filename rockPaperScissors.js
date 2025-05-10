@@ -1,20 +1,28 @@
 const args = process.argv.slice(2);
-
-// const args = ["Rock"];
-const items = ["Rock", "Paper", "Scissors"];
+const items = ["rock", "paper", "scissors"];
 const randomChoice = items[Math.floor(Math.random() * items.length)];
+const userChoice = args[0]?.toLowerCase();
 
 const getResult = () => {
-  if (args == randomChoice) return "Its a draw";
-  else if (
-    (args == "Rock" && randomChoice == "Paper") ||
-    (args == "Scissors" && randomChoice == "Rock") ||
-    (args == "Paper" && randomChoice == "Scissors")
+  if (!items.includes(userChoice)) {
+    console.error("Wrong input! Choose one of: Rock, Paper or Scissors.");
+    return;
+  }
+  let result = "";
+  if (userChoice === randomChoice) {
+    result = "It's a draw";
+  } else if (
+    (userChoice === "rock" && randomChoice === "paper") ||
+    (userChoice === "scissors" && randomChoice === "rock") ||
+    (userChoice === "paper" && randomChoice === "scissors")
   ) {
-    return "You lost";
-  } else return "You won";
+    result = "You lost";
+  } else {
+    result = "You won";
+  }
+  console.log(
+    `You chose ${userChoice}. Computer chose ${randomChoice}. ${result}.`
+  );
 };
 
-console.log(
-  `You chose ${args}. Computer chose ${randomChoice}. ${getResult()}.`
-);
+getResult();
